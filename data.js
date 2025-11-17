@@ -2,41 +2,41 @@ const procesos = {
   name: "Macroprocesos",
   children: [
     {
-      name: "Gestión Estratégica",
+      name: "N0: Gestión Estratégica",
       children: [
         {
-          name: "Planificación Institucional",
+          name: "N1: Planificación Institucional",
           children: [
             {
-              name: "Planificación Estratégica Institucional (PEI)",
+              name: "N2: Planificación Estratégica Institucional (PEI)",
               children: [
-                { name: "PEI aprobado" },
-                { name: "Matriz de indicadores del PEI" },
-                { name: "Informe técnico del PEI" }
+                { name: "P1: PEI aprobado" },
+                { name: "P2: Matriz de indicadores del PEI" },
+                { name: "P3: Informe técnico del PEI" }
               ]
             },
             {
-              name: "Planificación Operativa Institucional (POI)",
+              name: "N2: Planificación Operativa Institucional (POI)",
               children: [
-                { name: "POI anual" },
-                { name: "POI multianual" }
+                { name: "P1: POI anual" },
+                { name: "P2: POI multianual" }
               ]
             }
           ]
         },
         {
-          name: "Seguimiento y Evaluación Institucional",
+          name: "N1: Seguimiento y Evaluación Institucional",
           children: [
             {
-              name: "Producción y Difusión de Información Estadística",
+              name: "N2: Producción y Difusión de Información Estadística",
               children: [
-                { name: "Boletín Estadístico Institucional" }
+                { name: "P1: Boletín Estadístico Institucional" }
               ]
             },
             {
-              name: "Evaluación Institucional",
+              name: "N2: Evaluación Institucional",
               children: [
-                { name: "Informe de evaluación institucional" }
+                { name: "P1: Informe de evaluación institucional" }
               ]
             }
           ]
@@ -45,35 +45,35 @@ const procesos = {
     },
 
     {
-      name: "Gestión de la Modernización",
+      name: "N0: Gestión de la Modernización",
       children: [
         {
-          name: "Organización Institucional",
+          name: "N1: Organización Institucional",
           children: [
             {
-              name: "Documentos de Gestión Institucional",
+              name: "N2: Elaboración y Actualización de Documentos de Gestión Institucional",
               children: [
-                { name: "Estatuto" },
-                { name: "ROF" },
-                { name: "TUPA" },
-                { name: "TUSNE" }
+                { name: "P1: Estatuto" },
+                { name: "P2: ROF" },
+                { name: "P3: TUPA" },
+                { name: "P4: TUSNE" }
               ]
             },
             {
-              name: "Documentos de Gestión Interna",
+              name: "N2: Elaboración y Actualización de Documentos de Gestión Interna",
               children: [
-                { name: "SISADES actualizado" }
+                { name: "P1: SISADES actualizado" }
               ]
             }
           ]
         },
         {
-          name: "Innovación y Mejora Institucional",
+          name: "N1: Innovación y Mejora Institucional",
           children: [
             {
-              name: "Monitoreo y Evaluación de Mejoras",
+              name: "N2: Monitoreo y Evaluación de Mejoras",
               children: [
-                { name: "Informe de implementación de mejoras" }
+                { name: "P1: Informe de implementación de mejoras" }
               ]
             }
           ]
