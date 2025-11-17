@@ -43,41 +43,45 @@ function renderTree(node, depth = 0) {
     const body = document.createElement("div");
     body.className = "accordion-body";
 
-    // Si tiene hijos, se renderizan dentro
-    if (child.children) {
-      child.children.forEach(grandchild => {
-        const sub = document.createElement("div");
-        sub.className = "accordion-subitem";
-        sub.textContent = grandchild.name;
-        body.appendChild(sub);
+  // Si tiene hijos, se renderizan dentro
+if (child.children) {
+  child.children.forEach(grandchild => {
 
-        // SI EL SUBITEM TAMBIÉN TIENE HIJOS → anidamos otro acordeón
-        if (grandchild.children) {
-          const nestedHeader = document.createElement("div");
-          nestedHeader.className = "accordion-header nested";
-          nestedHeader.textContent = grandchild.name;
+    if (grandchild.children) {
+      // Crear encabezado de acordeón anidado
+      const nestedHeader = document.createElement("div");
+      nestedHeader.className = "accordion-header nested";
+      nestedHeader.textContent = grandchild.name;
 
-          const nestedBody = document.createElement("div");
-          nestedBody.className = "accordion-body";
+      const nestedBody = document.createElement("div");
+      nestedBody.className = "accordion-body";
 
-          grandchild.children.forEach(product => {
-            const p = document.createElement("div");
-            p.className = "accordion-product";
-            p.textContent = product.name;
-            nestedBody.appendChild(p);
-          });
-
-          body.appendChild(nestedHeader);
-          body.appendChild(nestedBody);
-
-          // Evento abrir/cerrar
-          nestedHeader.onclick = () => {
-            nestedHeader.classList.toggle("open");
-            nestedBody.classList.toggle("open");
-          };
-        }
+      // Productos
+      grandchild.children.forEach(product => {
+        const p = document.createElement("div");
+        p.className = "accordion-product";
+        p.textContent = product.name;
+        nestedBody.appendChild(p);
       });
+
+      body.appendChild(nestedHeader);
+      body.appendChild(nestedBody);
+
+      // Evento abrir/cerrar
+      nestedHeader.onclick = () => {
+        nestedHeader.classList.toggle("open");
+        nestedBody.classList.toggle("open");
+      };
+
+    } else {
+      // Si NO tiene hijos, es un subitem simple (N2 sin productos)
+      const sub = document.createElement("div");
+      sub.className = "accordion-subitem";
+      sub.textContent = grandchild.name;
+      body.appendChild(sub);
     }
+  });
+}
 
     // Evento abrir/cerrar acordeón principal
     header.onclick = () => {
