@@ -10,14 +10,14 @@ const procesos = {
             {
               name: "N2: Planificación Estratégica Institucional",
               children: [
-                { name: "P1: PEI aprobado" }
+                { name: "P1: PEI actualizado" }
               ]
             },
             {
               name: "N2: Planificación Operativa Institucional",
               children: [
                 { name: "P1: POI anual actualizado" },
-                { name: "P2: POI multianual" }
+                { name: "P2: POI multianual actualizado" }
               ]
             }
           ]
