@@ -1,91 +1,108 @@
 body {
-  background: #f5f7fb;
-  font-family: "Segoe UI", Arial, sans-serif;
+  background: #e8f1fa;
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 20px;
 }
 
 .titulo-principal {
   text-align: center;
-  font-size: 30px;
-  color: #002d62;
-  font-weight: 700;
-  margin-bottom: 30px;
+  font-size: 28px;
+  color: #003866;
+  font-weight: bold;
+  margin-bottom: 25px;
 }
 
 #tree-container {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: auto;
 }
 
 .level-title {
-  color: #002d62;
+  color: #003866;
   text-align: center;
-  margin-bottom: 25px;
-  font-size: 24px;
-  font-weight: 700;
-}
-
-/* --- ORGANIGRAMA --- */
-
-.organigrama-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px;
-  position: relative;
-}
-
-.organigrama-card {
-  background: white;
-  border: 2px solid #002d62;
-  border-radius: 10px;
-  padding: 20px;
-  min-width: 260px;
-  cursor: pointer;
-  text-align: center;
+  margin-bottom: 6px;
+  font-size: 26px;
   font-weight: bold;
-  transition: 0.25s;
-  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-  position: relative;
 }
 
-.organigrama-card:hover {
-  background: #ffef75;
-  transform: translateY(-4px);
-}
-
-/* LÍNEAS DE ORGANIGRAMA (verticales hacia abajo) */
-.organigrama-card::after {
-  content: "";
-  width: 2px;
-  height: 35px;
-  background: #002d62;
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.organigrama-wrapper .organigrama-card:last-child::after {
-  display: none;
-}
-
-/* BOTÓN REGRESAR */
-.btn-back {
-  margin-top: 30px;
-  padding: 12px 22px;
-  background: #002d62;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.level-subtitle {
+  text-align: center;
   font-size: 16px;
+  color: #3c3d3d;
+  margin-bottom: 25px;
 }
 
-.btn-back:hover {
-  background: #001a3d;
+/* LISTA DE ACORDEONES */
+.accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ITEM PRINCIPAL */
+.accordion-item {
+  background: #ffffff;
+  border: 2px solid #003866;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+}
+
+/* CABECERA DEL ACORDEÓN */
+.accordion-header {
+  padding: 14px 18px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #003866;
+  background: #dbe8f7;
+  transition: 0.25s;
+}
+
+/* Flecha indicadora */
+.accordion-header::after {
+  content: "▼";
+  float: right;
+  transition: 0.25s;
+}
+
+.accordion-header.open::after {
+  transform: rotate(180deg);
+}
+
+/* CUERPO */
+.accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  background: #ffffff;
+  transition: max-height 0.35s ease;
+}
+
+.accordion-body.open {
+  padding: 10px 18px;
+  max-height: 500px; /* suficiente para expandirse */
+}
+
+/* Subniveles */
+.accordion-subitem,
+.accordion-product {
+  background: #f7f7f7;
+  margin-bottom: 6px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 15px;
+  border-left: 4px solid #003866;
+  color: #3c3d3d;
+}
+
+/* Nested headers */
+.accordion-header.nested {
+  background: #f1f5fb;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+.accordion-header.nested.open {
+  background: #e0e8f8;
 }
