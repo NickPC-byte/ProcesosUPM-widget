@@ -1,48 +1,44 @@
 // Contenedor principal
 const container = document.getElementById("tree-container");
 
-function renderNode(node, depth = 0, parentElement) {
+// Render recursivo
+function renderNode(node, parentElement, depth = 0) {
 
   const item = document.createElement("div");
-  item.className = depth === 0 ? "accordion-root" : "accordion-item";
+  item.className = "accordion-item depth-" + depth;
 
   const header = document.createElement("div");
-  header.className = depth === 0 ? "accordion-header root" : "accordion-header";
+  header.className = "accordion-header depth-" + depth;
   header.textContent = node.name;
 
   const body = document.createElement("div");
-  body.className = depth === 3 ? "product-list" : "accordion-body";
+  body.className = "accordion-body depth-" + depth;
 
   item.appendChild(header);
   item.appendChild(body);
   parentElement.appendChild(item);
 
-  // EVENTO PARA ABRIR/CERRAR
-  if (depth < 3) {
-    header.onclick = () => {
-      header.classList.toggle("open");
-      body.classList.toggle("open");
-    };
+  // Solo los productos NO llevan acordeón
+  if (!node.children) {
+    const productDiv = document.createElement("div");
+    productDiv.className = "product-item";
+    productDiv.textContent = node.name;
+    body.appendChild(productDiv);
+    return;
   }
 
-  // Si es producto (nivel 3)
-  if (!node.children) return;
+  // Evento para abrir/cerrar
+  header.onclick = () => {
+    header.classList.toggle("open");
+    body.classList.toggle("open");
+  };
 
-  // Render hijos
+  // Recursión para hijos
   node.children.forEach(child => {
-    if (depth === 2) {
-      // Nivel 2 → productos
-      const productDiv = document.createElement("div");
-      productDiv.className = "accordion-product";
-      productDiv.textContent = child.name;
-      body.appendChild(productDiv);
-    } else {
-      // N0, N1 → sigue el acordeón normal
-      renderNode(child, depth + 1, body);
-    }
+    renderNode(child, body, depth + 1);
   });
 }
 
-// Inicializa dibujando TODO el árbol
+// Inicio
 container.innerHTML = "";
-renderNode(procesos, 0, container);
+renderNode(procesos, container, 0);
