@@ -46,7 +46,7 @@ function renderTree(node, depth = 0) {
     if (child.children) {
       child.children.forEach(n2 => {
 
-        // N2 tiene productos → acordeón
+        // N2 tiene productos → acordeón para N2, y ahora anida productos en acordeón si existen
         if (n2.children && n2.children.length > 0) {
           const n2Header = document.createElement("div");
           n2Header.className = "accordion-header nested";
@@ -55,19 +55,22 @@ function renderTree(node, depth = 0) {
           const n2Body = document.createElement("div");
           n2Body.className = "accordion-body nested-body";
 
-          // Añadir productos
+          // Añadir productos como sub-acordeón
           n2.children.forEach(product => {
-            const prod = document.createElement("div");
-            prod.className = "accordion-product";
-            prod.textContent = product.name;
-            n2Body.appendChild(prod);
+            const productHeader = document.createElement("div");
+            productHeader.className = "accordion-header product";
+            productHeader.textContent = product.name;
+
+            // Si un producto tiene hijos (por si en el futuro hay más niveles), puedes extender aquí
+            // Por ahora se muestra simplemente como texto, sin cuerpo a expandir
+            n2Body.appendChild(productHeader);
           });
 
           // Insertar acordeón del N2
           body.appendChild(n2Header);
           body.appendChild(n2Body);
 
-          // Evento de despliegue
+          // Evento de despliegue para N2
           n2Header.onclick = () => {
             n2Header.classList.toggle("open");
             n2Body.classList.toggle("open");
@@ -97,3 +100,4 @@ function renderTree(node, depth = 0) {
 
 // Inicializar
 renderTree(procesos, 0);
+
