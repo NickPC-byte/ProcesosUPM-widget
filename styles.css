@@ -1,16 +1,18 @@
+/* ----------- GLOBAL ----------- */
 body {
   background: #e8f1fa;
-  font-family: Arial, sans-serif;
+  font-family: "Poppins", Arial, sans-serif;
   margin: 0;
-  padding: 20px;
+  padding: 25px;
+  color: #3c3d3d;
 }
 
 .titulo-principal {
   text-align: center;
-  font-size: 28px;
+  font-size: 32px;
   color: #003866;
-  font-weight: bold;
-  margin-bottom: 25px;
+  font-weight: 600;
+  margin-bottom: 30px;
 }
 
 #tree-container {
@@ -18,91 +20,130 @@ body {
   margin: auto;
 }
 
+/* -------- TITULOS -------- */
 .level-title {
   color: #003866;
   text-align: center;
-  margin-bottom: 6px;
-  font-size: 26px;
-  font-weight: bold;
+  margin-bottom: 4px;
+  font-size: 27px;
+  font-weight: 600;
 }
 
 .level-subtitle {
   text-align: center;
   font-size: 16px;
   color: #3c3d3d;
-  margin-bottom: 25px;
+  margin-bottom: 22px;
 }
 
-/* LISTA DE ACORDEONES */
+/* -------- LISTA DE ACORDEONES -------- */
 .accordion-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 15px;
 }
 
-/* ITEM PRINCIPAL */
+/* -------- ITEM PRINCIPAL -------- */
 .accordion-item {
   background: #ffffff;
   border: 2px solid #003866;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 12px rgba(0,0,0,0.10);
+  transition: 0.3s ease;
 }
 
-/* CABECERA DEL ACORDEÓN */
+.accordion-item:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+/* -------- CABECERA -------- */
 .accordion-header {
-  padding: 14px 18px;
+  padding: 16px 20px;
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
   color: #003866;
-  background: #dbe8f7;
-  transition: 0.25s;
+  background: #d4e8fb; /* tono más elegante del azul */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.3s ease;
 }
 
-/* Flecha indicadora */
+.accordion-header:hover {
+  background: #c3def9;
+}
+
+/* Flecha elegante */
 .accordion-header::after {
-  content: "▼";
-  float: right;
-  transition: 0.25s;
+  content: "▸";
+  font-size: 20px;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
 }
 
 .accordion-header.open::after {
-  transform: rotate(180deg);
+  transform: rotate(90deg);
 }
 
-/* CUERPO */
+/* -------- CUERPO DESPLEGABLE -------- */
 .accordion-body {
   max-height: 0;
   overflow: hidden;
   background: #ffffff;
-  transition: max-height 0.35s ease;
+  transition: max-height 0.45s ease;
+  border-top: 1px solid #bcd3ea;
 }
 
 .accordion-body.open {
-  padding: 10px 18px;
-  max-height: 500px; /* suficiente para expandirse */
+  padding: 12px 20px;
+  max-height: 800px;
 }
 
-/* Subniveles */
-.accordion-subitem,
-.accordion-product {
-  background: #f7f7f7;
-  margin-bottom: 6px;
-  padding: 10px 14px;
-  border-radius: 6px;
+/* -------- SUBITEMS (Nivel 2) -------- */
+.accordion-subitem {
+  background: #f5fbff;
+  margin-bottom: 8px;
+  padding: 12px 18px;
+  border-radius: 8px;
+  border-left: 5px solid #78b8e5; /* azul institucional suave */
+  color: #003866;
   font-size: 15px;
-  border-left: 4px solid #003866;
-  color: #3c3d3d;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.25s ease;
 }
 
-/* Nested headers */
+.accordion-subitem:hover {
+  background: #e3f3ff;
+}
+
+/* -------- NESTED HEADER (para productos si usas más niveles) -------- */
 .accordion-header.nested {
   background: #f1f5fb;
   font-size: 16px;
-  margin-top: 8px;
+  font-weight: 500;
+  margin-top: 10px;
+  padding: 10px 15px;
 }
 
 .accordion-header.nested.open {
   background: #e0e8f8;
+}
+
+/* -------- PRODUCTOS -------- */
+.accordion-product {
+  background: #fff9cc; /* amarillo institucional suave */
+  margin-bottom: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border-left: 5px solid #f5eb6b; /* amarillo fuerte institucional */
+  font-size: 15px;
+  font-weight: 500;
+  color: #3c3d3d;
+}
+
+.accordion-product:hover {
+  background: #fdf3a6;
 }
