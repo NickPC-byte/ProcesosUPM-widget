@@ -1,7 +1,9 @@
-/* ----------- GLOBAL ----------- */
+/* ---------------------------------------------------
+   GLOBAL
+--------------------------------------------------- */
 body {
-  background: #e8f1fa;
-  font-family: "Poppins", Arial, sans-serif;
+  background: #f4f8fc;
+  font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 25px;
   color: #3c3d3d;
@@ -11,8 +13,8 @@ body {
   text-align: center;
   font-size: 32px;
   color: #003866;
-  font-weight: 600;
-  margin-bottom: 30px;
+  font-weight: 700;
+  margin-bottom: 35px;
 }
 
 #tree-container {
@@ -20,66 +22,74 @@ body {
   margin: auto;
 }
 
-/* -------- TITULOS -------- */
-.level-title {
-  color: #003866;
-  text-align: center;
-  margin-bottom: 4px;
-  font-size: 27px;
-  font-weight: 600;
-}
-
-.level-subtitle {
-  text-align: center;
-  font-size: 16px;
-  color: #3c3d3d;
-  margin-bottom: 22px;
-}
-
-/* -------- LISTA DE ACORDEONES -------- */
-.accordion-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-/* -------- ITEM PRINCIPAL -------- */
+/* ---------------------------------------------------
+   ACORDEONES – BASE
+--------------------------------------------------- */
 .accordion-item {
   background: #ffffff;
-  border: 2px solid #003866;
-  border-radius: 12px;
+  border-radius: 14px;
+  margin-bottom: 16px;
   overflow: hidden;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.10);
-  transition: 0.3s ease;
+  border: 2px solid #003866;
+  transition: 0.25s ease;
 }
 
 .accordion-item:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
 }
 
-/* -------- CABECERA -------- */
+/* ---------------------------------------------------
+   CABECERAS – DIFERENCIADAS POR NIVEL
+--------------------------------------------------- */
+
 .accordion-header {
-  padding: 16px 20px;
+  padding: 16px 22px;
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
-  color: #003866;
-  background: #d4e8fb; /* tono más elegante del azul */
   display: flex;
   justify-content: space-between;
   align-items: center;
   transition: 0.3s ease;
+  border-bottom: 1px solid #cbd9e6;
 }
 
-.accordion-header:hover {
-  background: #c3def9;
+/* N0 – Macroprocesos */
+.depth-0 .accordion-header {
+  background: #003866;
+  color: #ffffff;
 }
 
-/* Flecha elegante */
+.depth-0 .accordion-header:hover {
+  background: #012d54;
+}
+
+/* N1 – Procesos */
+.depth-1 .accordion-header {
+  background: #78b8e5;
+  color: #003866;
+}
+
+.depth-1 .accordion-header:hover {
+  background: #6da9d0;
+}
+
+/* N2 – Subprocesos */
+.depth-2 .accordion-header {
+  background: #dff0ff;
+  color: #003866;
+}
+
+.depth-2 .accordion-header:hover {
+  background: #d0e6fb;
+}
+
+/* Productos (sin header, solo fondo especial más abajo) */
+
+/* Flecha */
 .accordion-header::after {
   content: "▸";
   font-size: 20px;
-  transform: rotate(0deg);
   transition: transform 0.3s ease;
 }
 
@@ -87,71 +97,52 @@ body {
   transform: rotate(90deg);
 }
 
-/* -------- CUERPO DESPLEGABLE -------- */
+/* ---------------------------------------------------
+   BODY DE ACORDEONES
+--------------------------------------------------- */
 .accordion-body {
   max-height: 0;
   overflow: hidden;
-  background: #ffffff;
   transition: max-height 0.45s ease;
-  border-top: 1px solid #bcd3ea;
+  background: #ffffff;
 }
 
 .accordion-body.open {
-  padding: 12px 20px;
-  max-height: 800px;
+  padding: 15px 22px;
+  max-height: 1000px;
 }
 
-/* -------- SUBITEMS (Nivel 2) -------- */
-.accordion-subitem {
-  background: #f5fbff;
-  margin-bottom: 8px;
-  padding: 12px 18px;
-  border-radius: 8px;
-  border-left: 5px solid #78b8e5; /* azul institucional suave */
-  color: #003866;
+/* ---------------------------------------------------
+   PRODUCTOS
+--------------------------------------------------- */
+
+.product-item {
+  background: #fffbe2; /* amarillo institucional suave */
+  border-left: 6px solid #f5eb6b; /* amarillo fuerte */
+  color: #3c3d3d;
+  padding: 12px 16px;
   font-size: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
   font-weight: 500;
-  cursor: pointer;
   transition: 0.25s ease;
 }
 
-.accordion-subitem:hover {
-  background: #e3f3ff;
+.product-item:hover {
+  background: #fef3b4;
 }
 
-/* -------- NESTED HEADER (para productos si usas más niveles) -------- */
-.accordion-header.nested {
-  background: #f1f5fb;
-  font-size: 16px;
-  font-weight: 500;
-  margin-top: 10px;
-  padding: 10px 15px;
+/* ---------------------------------------------------
+   ESPACIADO ENTRE NIVELES
+--------------------------------------------------- */
+.depth-1 {
+  margin-left: 15px;
 }
 
-.accordion-header.nested.open {
-  background: #e0e8f8;
+.depth-2 {
+  margin-left: 30px;
 }
 
-/* -------- PRODUCTOS -------- */
-.accordion-product {
-  background: #fff9cc; /* amarillo institucional suave */
-  margin-bottom: 8px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  border-left: 5px solid #f5eb6b; /* amarillo fuerte institucional */
-  font-size: 15px;
-  font-weight: 500;
-  color: #3c3d3d;
-}
-
-.accordion-product:hover {
-  background: #fdf3a6;
-}
-/* Acordeón anidado N2 */
-.accordion-body.nested-body {
-  transition: max-height 0.35s ease;
-}
-
-.accordion-body.nested-body.open {
-  max-height: 600px; /* permite ver todos los productos */
+.depth-3 {
+  margin-left: 45px;
 }
