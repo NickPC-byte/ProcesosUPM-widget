@@ -53,7 +53,7 @@ function renderTree(node, depth = 0) {
           n2Header.textContent = n2.name;
 
           const n2Body = document.createElement("div");
-          n2Body.className = "accordion-body";
+          n2Body.className = "accordion-body nested-body";
 
           // Añadir productos
           n2.children.forEach(product => {
