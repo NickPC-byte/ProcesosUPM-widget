@@ -147,3 +147,11 @@ body {
 .accordion-product:hover {
   background: #fdf3a6;
 }
+/* Acordeón anidado N2 */
+.accordion-body.nested-body {
+  transition: max-height 0.35s ease;
+}
+
+.accordion-body.nested-body.open {
+  max-height: 600px; /* permite ver todos los productos */
+}
