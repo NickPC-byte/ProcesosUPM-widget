@@ -10,15 +10,13 @@ const procesos = {
             {
               name: "N2: Planificación Estratégica Institucional",
               children: [
-                { name: "P1: PEI aprobado" },
-                { name: "P2: Matriz de indicadores del PEI" },
-                { name: "P3: Informe técnico del PEI" }
+                { name: "P1: PEI aprobado" }
               ]
             },
             {
               name: "N2: Planificación Operativa Institucional",
               children: [
-                { name: "P1: POI anual" },
+                { name: "P1: POI anual actualizado" },
                 { name: "P2: POI multianual" }
               ]
             }
@@ -30,7 +28,7 @@ const procesos = {
             {
               name: "N2: Producción y Difusión de Información Estadística",
               children: [
-                { name: "P1: Boletín Estadístico Institucional" }
+                { name: "P1: Boletín Estadístico Institucional actualizado" }
               ]
             },
             {
@@ -53,10 +51,10 @@ const procesos = {
             {
               name: "N2: Elaboración y Actualización de Documentos de Gestión Institucional",
               children: [
-                { name: "P1: Estatuto" },
-                { name: "P2: ROF" },
-                { name: "P3: TUPA" },
-                { name: "P4: TUSNE" }
+                { name: "P1: Estatuto Actualizado" },
+                { name: "P2: ROF Actualizado" },
+                { name: "P3: TUPA Actualizado" },
+                { name: "P4: TUSNE Actualizado" }
               ]
             },
             {
@@ -73,7 +71,7 @@ const procesos = {
             {
               name: "N2: Monitoreo y Evaluación de Mejoras",
               children: [
-                { name: "P1: Informe de implementación de mejoras" }
+                { name: "P1: Informe anual de implementación de mejoras" }
               ]
             }
           ]
