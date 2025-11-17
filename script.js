@@ -1,57 +1,95 @@
 // Contenedor principal
 const container = document.getElementById("tree-container");
 
-// HISTORIAL PARA RETROCEDER
-let stack = [];
+// Función para detectar el nivel según profundidad
+function getLevelName(depth) {
+  if (depth === 0) return "Nivel 0: Macroprocesos";
+  if (depth === 1) return "Nivel 1: Procesos";
+  if (depth === 2) return "Nivel 2: Subprocesos";
+  if (depth === 3) return "Productos";
+  return "";
+}
 
-// FUNCIÓN PRINCIPAL QUE DIBUJA LAS TARJETAS
-function renderLevel(node) {
-  
-  // Guardar historial para regresar
-  stack.push(node);
+// Render principal con acordeón
+function renderTree(node, depth = 0) {
+  container.innerHTML = "";
 
-  container.innerHTML = ""; // Limpiar pantalla
-
+  // Título principal
   const title = document.createElement("h2");
   title.textContent = node.name;
   title.className = "level-title";
   container.appendChild(title);
 
-  const wrapper = document.createElement("div");
-  wrapper.className = "card-wrapper organigrama-wrapper";
-  container.appendChild(wrapper);
+  // SUBTÍTULO AUTOMÁTICO
+  const subtitle = document.createElement("p");
+  subtitle.className = "level-subtitle";
+  subtitle.textContent = getLevelName(depth);
+  container.appendChild(subtitle);
 
-  // Dibujar tarjetas de los hijos
+  // Contenedor de acordeón
+  const list = document.createElement("div");
+  list.className = "accordion-list";
+  container.appendChild(list);
+
+  // Crear acordeones
   (node.children || []).forEach(child => {
-    const card = document.createElement("div");
-    card.className = "card organigrama-card";
+    const item = document.createElement("div");
+    item.className = "accordion-item";
 
-    card.innerHTML = `
-      <div class="card-title">${child.name}</div>
-    `;
+    const header = document.createElement("div");
+    header.className = "accordion-header";
+    header.textContent = child.name;
 
-    wrapper.appendChild(card);
+    const body = document.createElement("div");
+    body.className = "accordion-body";
 
-    // Si tiene hijos → clic para abrir
+    // Si tiene hijos, se renderizan dentro
     if (child.children) {
-      card.addEventListener("click", () => renderLevel(child));
+      child.children.forEach(grandchild => {
+        const sub = document.createElement("div");
+        sub.className = "accordion-subitem";
+        sub.textContent = grandchild.name;
+        body.appendChild(sub);
+
+        // SI EL SUBITEM TAMBIÉN TIENE HIJOS → anidamos otro acordeón
+        if (grandchild.children) {
+          const nestedHeader = document.createElement("div");
+          nestedHeader.className = "accordion-header nested";
+          nestedHeader.textContent = grandchild.name;
+
+          const nestedBody = document.createElement("div");
+          nestedBody.className = "accordion-body";
+
+          grandchild.children.forEach(product => {
+            const p = document.createElement("div");
+            p.className = "accordion-product";
+            p.textContent = product.name;
+            nestedBody.appendChild(p);
+          });
+
+          body.appendChild(nestedHeader);
+          body.appendChild(nestedBody);
+
+          // Evento abrir/cerrar
+          nestedHeader.onclick = () => {
+            nestedHeader.classList.toggle("open");
+            nestedBody.classList.toggle("open");
+          };
+        }
+      });
     }
-  });
 
-  // Botón "Regresar"
-  if (stack.length > 1) {
-    const back = document.createElement("button");
-    back.textContent = "← Regresar";
-    back.className = "btn-back";
-
-    back.onclick = () => {
-      stack.pop();
-      renderLevel(stack.pop());
+    // Evento abrir/cerrar acordeón principal
+    header.onclick = () => {
+      header.classList.toggle("open");
+      body.classList.toggle("open");
     };
 
-    container.appendChild(back);
-  }
+    item.appendChild(header);
+    item.appendChild(body);
+    list.appendChild(item);
+  });
 }
 
-// Inicializar widget
-renderLevel(procesos);
+// Inicializar
+renderTree(procesos, 0);
