@@ -18,7 +18,7 @@ function renderNode(node, parentElement, depth = 0) {
   item.appendChild(body);
   parentElement.appendChild(item);
 
-  // Solo los productos NO llevan acordeón
+  // Si no tiene hijos → es un producto
   if (!node.children) {
     const productDiv = document.createElement("div");
     productDiv.className = "product-item";
@@ -27,18 +27,21 @@ function renderNode(node, parentElement, depth = 0) {
     return;
   }
 
-  // Evento para abrir/cerrar
+  // Evento de apertura/cierre
   header.onclick = () => {
     header.classList.toggle("open");
     body.classList.toggle("open");
   };
 
-  // Recursión para hijos
+  // Renderizar hijos
   node.children.forEach(child => {
     renderNode(child, body, depth + 1);
   });
 }
 
-// Inicio
+// Renderizar directamente los N0 (macroprocesos)
 container.innerHTML = "";
-renderNode(procesos, container, 0);
+
+procesos.children.forEach(macro => {
+  renderNode(macro, container, 0);
+});
