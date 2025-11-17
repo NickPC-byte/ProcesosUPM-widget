@@ -20,7 +20,7 @@ function renderTree(node, depth = 0) {
   title.className = "level-title";
   container.appendChild(title);
 
-  // SUBTÍTULO AUTOMÁTICO
+  // Subtítulo automático
   const subtitle = document.createElement("p");
   subtitle.className = "level-subtitle";
   subtitle.textContent = getLevelName(depth);
@@ -31,7 +31,6 @@ function renderTree(node, depth = 0) {
   list.className = "accordion-list";
   container.appendChild(list);
 
-  // Crear acordeones
   (node.children || []).forEach(child => {
     const item = document.createElement("div");
     item.className = "accordion-item";
@@ -43,47 +42,48 @@ function renderTree(node, depth = 0) {
     const body = document.createElement("div");
     body.className = "accordion-body";
 
-  // Si tiene hijos, se renderizan dentro
-if (child.children) {
-  child.children.forEach(grandchild => {
+    // ----- NIVEL 1 → Muestra N2 -----
+    if (child.children) {
+      child.children.forEach(n2 => {
 
-    if (grandchild.children) {
-      // Crear encabezado de acordeón anidado
-      const nestedHeader = document.createElement("div");
-      nestedHeader.className = "accordion-header nested";
-      nestedHeader.textContent = grandchild.name;
+        // N2 tiene productos → acordeón
+        if (n2.children && n2.children.length > 0) {
+          const n2Header = document.createElement("div");
+          n2Header.className = "accordion-header nested";
+          n2Header.textContent = n2.name;
 
-      const nestedBody = document.createElement("div");
-      nestedBody.className = "accordion-body";
+          const n2Body = document.createElement("div");
+          n2Body.className = "accordion-body";
 
-      // Productos
-      grandchild.children.forEach(product => {
-        const p = document.createElement("div");
-        p.className = "accordion-product";
-        p.textContent = product.name;
-        nestedBody.appendChild(p);
+          // Añadir productos
+          n2.children.forEach(product => {
+            const prod = document.createElement("div");
+            prod.className = "accordion-product";
+            prod.textContent = product.name;
+            n2Body.appendChild(prod);
+          });
+
+          // Insertar acordeón del N2
+          body.appendChild(n2Header);
+          body.appendChild(n2Body);
+
+          // Evento de despliegue
+          n2Header.onclick = () => {
+            n2Header.classList.toggle("open");
+            n2Body.classList.toggle("open");
+          };
+
+        } else {
+          // N2 sin productos → solo texto
+          const simpleN2 = document.createElement("div");
+          simpleN2.className = "accordion-subitem";
+          simpleN2.textContent = n2.name;
+          body.appendChild(simpleN2);
+        }
       });
-
-      body.appendChild(nestedHeader);
-      body.appendChild(nestedBody);
-
-      // Evento abrir/cerrar
-      nestedHeader.onclick = () => {
-        nestedHeader.classList.toggle("open");
-        nestedBody.classList.toggle("open");
-      };
-
-    } else {
-      // Si NO tiene hijos, es un subitem simple (N2 sin productos)
-      const sub = document.createElement("div");
-      sub.className = "accordion-subitem";
-      sub.textContent = grandchild.name;
-      body.appendChild(sub);
     }
-  });
-}
 
-    // Evento abrir/cerrar acordeón principal
+    // Evento para abrir/cerrar acordeón de N0 y N1
     header.onclick = () => {
       header.classList.toggle("open");
       body.classList.toggle("open");
